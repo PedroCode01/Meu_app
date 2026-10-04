@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
+    <title>Perfil do Usuário</title>
+</head>
+
+<body>
+    <img class= "img_quadrada"src="{{url_for('static', filename='img/logo_ifro.png')}}" alt="Logo">
+    <br>
+
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('index') }}">Página Inicial</a></li>
+            <li><a href="{{ url_for('contato') }}">Contatos</a></li>
+            <li><a href="{{ url_for('dados_usuario') }}">Usuário</a></li>
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+        </ul>
+    </nav>
+
+<!-- Informação que muda nas páginas coloca como extensão -->
+{% block content %}
+
+{% endblock %}
+
+    <script src="{{url_for ('static', filename ='js/config.js')}}"></script>
+    <script src="{{url_for ('static', filename ='js/form.js')}}"></script>
+
+<h6>Copyright © 2026 Pedro Antunes. Todos os direitos reservados.</h6>
+</body>
+</html>
