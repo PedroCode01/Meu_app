@@ -1,7 +1,7 @@
 function verificarDigitacao(event) {
     const fieldValue = event.target.value;
     if (fieldValue.length > 20) {
-        alert("Texto muito longo!");
+        alert("Usuário com muitos caracteres!");
     }
 }
 
