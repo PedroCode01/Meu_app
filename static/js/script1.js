@@ -1,27 +1,50 @@
-function verificarDigitacao(event) {
-    const fieldValue = event.target.value;
-    if (fieldValue.length > 20) {
-        alert("Usuário com muitos caracteres!");
-    }
-}
+document.addEventListener("DOMContentLoaded", function() {
+    console.log("Script carregado com sucesso!");
 
-function validarSenha() {
-    var senha = document.getElementById("senha").value;
+    // 1. Monitora o envio do formulário de login
+    const formLogin = document.getElementById("formLogin");
+    if (formLogin) {
+        formLogin.addEventListener("submit", function(event) {
+            console.log("Tentando enviar o formulário de login...");
+            
+            var campoUsuario = document.getElementById("nome_usuario");
+            var campoSenha = document.getElementById("senha");
 
-    // Verificar o tamanho mínimo da senha
-    if (senha.length < 8) {
-        alert("A senha deve ter pelo menos 8 caracteres");
-        return false;
-    }
+            // Verifica se o campo de usuário existe
+            if (!campoUsuario) {
+                console.error("ERRO: O input com id='nome_usuario' não foi encontrado!");
+                event.preventDefault();
+                return;
+            }
 
-    // Verificar se a senha contém pelo menos maiúsula e números
-    var uppercaseRegex = /[A-Z]/; //Regex é como uma máscara
-    var numeroRegex = /[0-9]/;
-    //uma letra maiúscula e um número
-    if (!uppercaseRegex.test(senha) || !numeroRegex.test(senha)) {
-        alert("A senha deve conter pelo menos uma letra maiúscula e um número");
-        return false; // não passou na validação, retorna false 
+            // Verifica se o campo de senha existe
+            if (!campoSenha) {
+                console.error("ERRO: O input com id='senha' não foi encontrado!");
+                event.preventDefault();
+                return;
+            }
+
+            var senha = campoSenha.value;
+
+            // Validação do tamanho da senha
+            if (senha.length < 8) {
+                alert("A senha deve ter pelo menos 8 caracteres");
+                event.preventDefault();
+                return;
+            }
+
+            // Validação de maiúscula e número
+            var uppercaseRegex = /[A-Z]/;
+            var numeroRegex = /[0-9]/;
+            
+            if (!uppercaseRegex.test(senha) || !numeroRegex.test(senha)) {
+                alert("A senha deve conter pelo menos uma letra maiúscula e um número");
+                event.preventDefault();
+                return;
+            }
+
+            console.log("Validação passou! Enviando para o Flask...");
+        });
     }
-    return true; // o formulário será enviado para a rota /autenticar
-}
+});
 

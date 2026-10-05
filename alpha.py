@@ -33,11 +33,32 @@ def contato():
 def login():
     return render_template('t_login_flash_js_cadastro.html')
 
-@meu_site.route('/autenticar', methods=['GET','POST'])
+@meu_site.route("/autenticar", methods=['GET', 'POST']) 
 def autenticar():
-    nome_usuario = request.form.get('nome_usuario')
+    # Método POST - pega nos campos do formulário
+    usuario = request.form.get('nome_usuario')
     senha = request.form.get('senha')
-    return f"Usuário: {nome_usuario} - Senha: {senha}"
+    
+    # Agora usa a função de verificação com a tabela de usuários
+    if verificar_login(usuario, senha):
+        return f"Login bem-sucedido! Bem-vindo(a), {usuario}."
+    else:
+        flash("Dados inválidos!")
+        flash("Login ou senha inválidos!")
+        return redirect('/login')
+
+# Base de dados de login e senha usando um dicionário
+tabela_Usuarios = {
+    "mariela": "SuperSenh@2000",
+    "alunoIFRO": "SuperSenh@2000",
+    "visitante": "SuperSenh@2000"
+}
+
+def verificar_login(login, senha):
+    if login in tabela_Usuarios and tabela_Usuarios[login] == senha:
+        return True
+    else:
+        return False
 
 @meu_site.route('/usuario')
 def dados_usuario():
@@ -60,6 +81,6 @@ def saudacaoes(nome):
 
 #maiores detalhes nos slides que estão no AVA.
 if __name__ == '__main__':  #verifica se o arquivo está sendo executado diretamente, e não importado
-    meu_site.run(port=7000)
+    meu_site.run(port=8050)
 
 meu_site.run( port=6000)    #executa caso o o arquivo seja importado, mas não é uma boa prática, pois pode gerar conflito de portas
