@@ -8,135 +8,83 @@
     <title>{% block title %}Perfil do Usuário{% endblock %}</title>
 
     <!-- Bootstrap CSS -->
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-    >
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- CSS personalizado -->
-    <link
-        rel="stylesheet"
-        href="{{ url_for('static', filename='css/estilo.css') }}"
-    >
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
 
-    <!-- JavaScript -->
-    <script
-        src="{{ url_for('static', filename='js/script1.js') }}"
-        defer
-    ></script>
+    <!-- Bloco opcional para scripts ou estilos específicos de cada página filha -->
+    {% block scripts %}{% endblock %}
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100 bg-light">
 
     <!-- Cabeçalho -->
     <header>
-
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
             <div class="container">
 
-                <a class="navbar-brand" href="{{ url_for('index') }}">
-                    <img
-                        class = img_quadrada
-                        src="{{ url_for('static', filename='img/logo_ifro.png') }}"
-                        alt="Logo do IFRO"
-                        width="50"
-                        height="50"
-                        class="rounded"
-                    >
+                <a class="navbar-brand d-flex align-items-center gap-2" href="{{ url_for('index') }}">
+                    <img src="{{ url_for('static', filename='img/logo_ifro.png') }}" 
+                         alt="Logo do IFRO" 
+                         width="40" 
+                         height="40" 
+                         class="rounded img_quadrada">
+                    <span class="fw-semibold">IFRO Sistema</span>
                 </a>
 
                 <!-- Botão para telas pequenas -->
-                <button
-                    class="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#menuPrincipal"
-                    aria-controls="menuPrincipal"
-                    aria-expanded="false"
-                    aria-label="Abrir menu"
-                >
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal"
+                    aria-controls="menuPrincipal" aria-expanded="false" aria-label="Abrir menu">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <!-- Menu -->
                 <div class="collapse navbar-collapse" id="menuPrincipal">
-
-                    <ul class="navbar-nav ms-auto">
+                    <ul class="navbar-nav ms-auto align-items-lg-center">
 
                         <li class="nav-item">
-                            <a
-                                class="nav-link"
-                                href="{{ url_for('index') }}"
-                            >
-                                Página Inicial
-                            </a>
+                            <a class="nav-link" href="{{ url_for('index') }}">Página Inicial</a>
                         </li>
 
                         <li class="nav-item">
-                            <a
-                                class="nav-link"
-                                href="{{ url_for('contato') }}"
-                            >
-                                Contatos
-                            </a>
+                            <a class="nav-link" href="{{ url_for('contato') }}">Contatos</a>
                         </li>
 
                         <li class="nav-item">
-                            <a
-                                class="nav-link"
-                                href="{{ url_for('dados_usuario') }}"
-                            >
-                                Usuário
-                            </a>
+                            <a class="nav-link" href="{{ url_for('dados_usuario') }}">Usuário</a>
                         </li>
 
-                        <li class="nav-item">
-                            <a
-                                class="nav-link"
-                                href="{{ url_for('login') }}"
-                            >
-                                Login
-                            </a>
+                        <li class="nav-item ms-lg-2">
+                            <a class="btn btn-outline-light btn-sm px-3" href="{{ url_for('login') }}">Login</a>
                         </li>
 
                     </ul>
-
                 </div>
             </div>
         </nav>
-
     </header>
 
     <!-- Conteúdo das páginas -->
-    <main class="container py-4">
-
+    <main class="container my-4 flex-fill">
         {% block content %}
         {% endblock %}
-
     </main>
 
     <!-- Rodapé -->
-    <footer class="bg-dark text-white text-center py-3 mt-5">
-
+    <footer class="bg-dark text-white text-center py-3 mt-auto">
         <div class="container">
-            <p class="mb-0">
-                Copyright © 2026 Pedro Antunes.
-                Todos os direitos reservados.
+            <p class="mb-0 small text-white-50">
+                Copyright © 2026 Pedro Antunes. Todos os direitos reservados.
             </p>
         </div>
-
     </footer>
 
     <!-- Bootstrap JavaScript -->
-    <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- JavaScript do projeto -->
-    <script
-        src="{{ url_for('static', filename='js/config.js') }}"
-        defer
-    ></script>
+    <script src="{{ url_for('static', filename='js/config.js') }}" defer></script>
 
 </body>
 

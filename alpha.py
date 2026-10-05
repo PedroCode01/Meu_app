@@ -3,7 +3,9 @@ from flask import request   #para trabalhar com os métodos GET e POST
 from flask import flash     #para msgs popup
 from flask import redirect  #para redirecionar páginas
 
+
 meu_site = Flask(__name__ , template_folder='t_templates')  #cria o objeto meu_site, que é uma instância da classe Flask
+meu_site.config['SECRET_KEY'] = "palavra-secreta-IFRO"
 
 @meu_site.route('/')
 @meu_site.route('/ola')
@@ -43,8 +45,7 @@ def autenticar():
     if verificar_login(usuario, senha):
         return f"Login bem-sucedido! Bem-vindo(a), {usuario}."
     else:
-        flash("Dados inválidos!")
-        flash("Login ou senha inválidos!")
+        flash("Login ou senha inválidos!", "danger")
         return redirect('/login')
 
 # Base de dados de login e senha usando um dicionário
